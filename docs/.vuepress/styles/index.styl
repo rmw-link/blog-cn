@@ -1,0 +1,200 @@
+@font-face
+  font-family code
+  font-weight 300
+  font-display block
+  src url('/font/ln/code/en.woff2') format('woff2')
+
+@font-face
+  font-family h
+  font-weight 500
+  font-display block
+  src url('/font/ln/h/cn.woff2') format('woff2')
+
+@font-face
+  font-family h
+  font-weight 500
+  font-display block
+  src url('/font/ln/h/en.woff2') format('woff2')
+  unicode-range U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+
+@font-face
+  font-family html
+  font-weight 300
+  font-display block
+  src url('/font/ln/html/300/cn.woff2') format('woff2')
+
+@font-face
+  font-family html
+  font-display block
+  font-weight 100
+  src url('/font/ln/html/100/cn.woff2') format('woff2')
+
+
+/* latin-ext */
+font-face
+  font-family html
+  font-style normal
+  font-weight 100
+  font-display swap
+  src url('/font/css/woff2/S6u8w4BMUTPHh30AUi-qNiXg7eU0.woff2') format('woff2')
+  unicode-range U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+
+/* latin */
+font-face
+  font-family html
+  font-style normal
+  font-weight 100
+  font-display swap
+  src url('/font/css/woff2/S6u8w4BMUTPHh30AXC-qNiXg7Q.woff2') format('woff2')
+  unicode-range U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+
+/* latin-ext */
+font-face
+  font-family html
+  font-style normal
+  font-weight 300
+  font-display swap
+  src url('/font/css/woff2/S6u9w4BMUTPHh7USSwaPGQ3q5d0N7w.woff2') format('woff2')
+  unicode-range U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+
+/* latin */
+font-face
+  font-family html
+  font-style normal
+  font-weight 300
+  font-display swap
+  src url('/font/css/woff2/S6u9w4BMUTPHh7USSwiPGQ3q5d0.woff2') format('woff2')
+  unicode-range U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+
+/* latin-ext */
+font-face
+  font-family html
+  font-style normal
+  font-weight 400
+  font-display swap
+  src url('/font/css/woff2/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2') format('woff2')
+  unicode-range U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+
+/* latin */
+font-face
+  font-family html
+  font-style normal
+  font-weight 400
+  font-display swap
+  src url('/font/css/woff2/S6uyw4BMUTPHjx4wXiWtFCc.woff2') format('woff2')
+  unicode-range U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+
+
+body
+  font-family html
+  font-weight 600
+  strong, b
+    -webkit-text-emphasis: '·' #000;
+    -webkit-text-emphasis-position: under left;
+    text-emphasis: '·' #000;
+    text-emphasis-position: under left;
+
+.page-nav a
+  font-weight 600
+  &:hover
+    color: #f40
+
+h1, h2, h3, h4, h5, h6
+  font-family h, sans-serif
+  letter-spacing 0.04em
+  font-weight normal
+  border none
+
+pre,code
+  font-family code
+
+.sidebar
+  top 3.4rem
+  padding-top .4rem
+  bottom -.3rem
+  box-shadow -1px 0 6px -5px #333 inset
+  & > .sidebar-links
+    user-select none
+    & > li
+      & > a.sidebar-link
+        &.active
+          color #000
+          border none
+          position relative
+          &:before
+            content "→"
+            transform scale(.5)
+            left 0
+            transform-origin 0 45%
+            position absolute
+
+.page
+  a
+    font-weight 600
+  &>.theme-default-content
+    padding-bottom 0
+  &>.page-edit
+    padding 0
+  &>#gitalk-container
+    max-width: 740px;
+    padding: 0;
+    border-top: 1px solid #eee;
+    margin-top: -3px;
+    .gt-header-textarea,.gt-btn,.gt-header-preview
+      border-radius 0
+    .gt-header-textarea,.gt-header-preview
+      background transparent
+    .gt-container
+      .gt-meta
+        margin-top 0
+      .gt-link-counts
+        color #000
+        border none
+        &:hover
+          color #f40
+
+@media(max-width: 959px)
+  .page
+    &>#gitalk-container
+      padding 0 2rem
+
+
+.nav-links>.nav-item>.dropdown-wrapper:first-child>button
+  background url("/chat.svg") no-repeat 0 20%/1.1rem
+  filter grayscale(100%)
+  font-weight 600
+  color #999
+  padding-left 1.7rem
+  &:hover
+    filter unset
+    color #f40
+    .arrow.down
+      border-top-color #f40
+
+.navbar>.home-link>.site-name
+  font-family h
+  color #f00
+  margin-left -0.5rem
+  background url(/ico.svg) no-repeat 0 50%/2rem
+  padding-left 2.5rem
+  padding-top .5rem
+  margin-top -.3rem
+  letter-spacing .2rem
+  font-weight bold
+  font-size 1.5rem
+
+
+.page>.theme-default-content
+  padding-top 2.7rem
+
+@media (max-width: 719px)
+
+  .theme-container
+    &>.navbar
+      padding-left 2rem
+      &>.sidebar-button
+        right .5rem
+        left auto
+
+  a.header-anchor
+    margin-left -0.57em
