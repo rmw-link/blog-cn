@@ -10,6 +10,8 @@
 
 身份秘钥是Ed25519密钥对。
 
+是的，更快是极客永恒的追求。
+
 首次启动时，客户端会自动生成一个密钥对。
 
 不同设备可以导入同一秘钥，也就是说，你的平板、手机、电脑可以同时在线。
@@ -46,7 +48,20 @@ A收到B的空包响应后，首先检查缓存，确认B的IP地址和端口是
 
 ## 交换公钥
 
+代码实现中(参见[ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/blob/master/src/blake3_512.rs))，我们用效率更高的blake3-512替换标准Ed25519算法中的sha512作为哈希函数。
+
+
 ## 通讯加密
+
+Ed25519的公钥和秘钥可以转换为X25519的公钥和秘钥(参见[USING ED25519 SIGNING KEYS FOR ENCRYPTION](https://blog.filippo.io/using-ed25519-keys-for-encryption/))。
+
+通过X25519协议交换秘钥
+
+代码实现参见 
+
+https://github.com/hyperledger/ursa/blob/92d752100e6c8afde48e3406eaa585e1cb02b954/libursa/src/signatures/ed25519.rs#L25
+
+
 
 加密流程 ::
   
@@ -55,6 +70,7 @@ A收到B的空包响应后，首先检查缓存，确认B的IP地址和端口是
   加密内容 = 校验码 +（原始内容 异或 流密码）
 
 解密流程 ::
+
   流密码 = blake3(校验码+秘钥), 哈希输出长度=内容长度
   解密内容 = 加密内容 异或 流密码
   计算 xxh3::Hash64(解密内容+秘钥) 和 校验码 比对
