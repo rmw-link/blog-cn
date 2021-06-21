@@ -50,9 +50,7 @@ A收到B的空包响应后，首先检查缓存，确认B的IP地址和端口是
 
 更快是极客永恒的追求。
 
-
 ## 通讯加密
-
 
 ### 生成私匙 ( diffie hellman )
 
@@ -66,7 +64,7 @@ https://github.com/hyperledger/ursa/blob/92d752100e6c8afde48e3406eaa585e1cb02b95
 
 ### 加密解密
 
-为了方便起见，我们用 [xxh3](https://crates.io/crates/twox-hash) 和 [blake3](https://crates.io/crates/blake3) 自定义了一套加密算法。
+为了方便起见，我们用 [xxh3](https://crates.io/crates/twox-hash) 和 [blake3](https://crates.io/crates/blake3) 自定义了一套加密算法，以方便将对每个UDP包单独加密。
 
 加密流程 ::
   
