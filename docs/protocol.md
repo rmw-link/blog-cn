@@ -54,13 +54,15 @@ A收到B的空包响应后，首先检查缓存，确认B的IP地址和端口是
 
 ### 生成私匙 ( diffie hellman )
 
-Ed25519的公钥和秘钥可以转换为X25519的公钥和秘钥(参见[USING ED25519 SIGNING KEYS FOR ENCRYPTION](https://blog.filippo.io/using-ed25519-keys-for-encryption/))。
+Ed25519的公钥和秘钥可以转换为X25519的公钥和秘钥。
 
-交换Ed25519公钥之后，通过X25519协议生成秘钥。
+参见:
 
-rust代码实现参见 
+* [USING ED25519 SIGNING KEYS FOR ENCRYPTION](https://blog.filippo.io/using-ed25519-keys-for-encryption/)
+* [ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/commit/3ea98e4403942b328b1deedf322619622e4503a7])
 
-https://github.com/hyperledger/ursa/blob/92d752100e6c8afde48e3406eaa585e1cb02b954/libursa/src/signatures/ed25519.rs#L25
+所以，交换Ed25519公钥之后，就可以通过X25519协议生成秘钥。
+
 
 ### 加密解密
 
