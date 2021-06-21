@@ -107,7 +107,7 @@ impl<
 ```
 
 
-#### to_owned
+#### `to_owned`
 
 把数据从栈中复制到堆中，成为自己的数据。
 
@@ -115,3 +115,23 @@ impl<
 
 * &str => String
 * Path => PathBuf
+
+#### `#![feature(decl_macro)]`
+
+`macro_rules!`
+
+声明的宏没法使用use，否则会出现reimported（当调用一个宏多次之后）
+
+加入 #![feature(decl_macro)] 之后就可以使用 
+
+类似这样的写法
+
+```
+#[macro_export]
+pub macro repr($cls:ident) {
+  use sdb::direct_repr;
+  direct_repr!($cls);
+}
+```
+
+参见 [声明性宏 2.0](https://github.com/rust-lang/rust/issues/39412)
