@@ -53,27 +53,34 @@ A收到B的空包响应后，首先检查缓存，确认B的IP地址和端口是
 
 ## 通讯加密
 
+
+### 生成私匙 ( diffie hellman )
+
 Ed25519的公钥和秘钥可以转换为X25519的公钥和秘钥(参见[USING ED25519 SIGNING KEYS FOR ENCRYPTION](https://blog.filippo.io/using-ed25519-keys-for-encryption/))。
 
-通过X25519协议交换秘钥
+交换Ed25519公钥之后，通过X25519协议生成秘钥。
 
-代码实现参见 
+rust代码实现参见 
 
 https://github.com/hyperledger/ursa/blob/92d752100e6c8afde48e3406eaa585e1cb02b954/libursa/src/signatures/ed25519.rs#L25
 
+### 加密解密
 
+为了方便起见，我们用 [xxh3](https://crates.io/crates/twox-hash) 和 [blake3](https://crates.io/crates/blake3) 自定义了一套加密算法。
 
 加密流程 ::
   
   校验码 = xxh3::Hash64(原始内容+秘钥)
   流密码 = blake3(校验码+秘钥), 哈希输出长度=内容长度
-  加密内容 = 校验码 +（原始内容 异或 流密码）
+  加密内容 = 原始内容 异或 流密码
+  加密校验码 = xxh3::Hash64(加密内容+秘钥) 异或 校验码
+  输出 = 加密校验码 + 加密内容
 
 解密流程 ::
-
+  校验码 = xxh3::Hash64(加密内容+秘钥) 异或 加密校验码
   流密码 = blake3(校验码+秘钥), 哈希输出长度=内容长度
   解密内容 = 加密内容 异或 流密码
-  计算 xxh3::Hash64(解密内容+秘钥) 和 校验码 比对
+  完整性效验 : 计算 xxh3::Hash64(解密内容+秘钥) == 校验码
 
 ## 发现彼此
 
