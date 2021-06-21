@@ -135,3 +135,15 @@ pub macro repr($cls:ident) {
 ```
 
 参见 [声明性宏 2.0](https://github.com/rust-lang/rust/issues/39412)
+
+#### 过程宏
+
+过程宏就是自己解析语法树，输出代码。
+
+过程宏必须是一个单独的包，可以用子包来实现。
+
+参见 [sdb](https://github.com/rmw-link/sdb)
+
+
+
+
