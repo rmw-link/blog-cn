@@ -142,8 +142,9 @@ pub macro repr($cls:ident) {
 
 过程宏必须是一个单独的包，可以用子包来实现。
 
-参见 [sdb](https://github.com/rmw-link/sdb)
+参见 :
 
-
+* [sdb代码示例](https://github.com/rmw-link/sdb)
+* [如何编写一个过程宏(proc-macro)](https://dengjianping.github.io/2019/02/28/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E8%BF%87%E7%A8%8B%E5%AE%8F(proc-macro).html)
 
 
