@@ -15,9 +15,9 @@
 
 #### 堆栈和Box
 
-rust 不能返回 unsized 的 trait，但是可以返回 Box<unsized trait>
+rust 不能返回 unsized 的 trait，但是可以返回 `Box<unsized trait>`
 
-这是因为Box<T>指向堆上的数据，参考 [使用Box <T>指向堆上的数据](https://kaisery.github.io/trpl-zh-cn/ch15-01-box.html#%E4%BD%BF%E7%94%A8box-t%E6%8C%87%E5%90%91%E5%A0%86%E4%B8%8A%E7%9A%84%E6%95%B0%E6%8D%AE)。
+这是因为`Box<T>`指向堆上的数据，参考 [使用`Box <T>`指向堆上的数据](https://kaisery.github.io/trpl-zh-cn/ch15-01-box.html#%E4%BD%BF%E7%94%A8box-t%E6%8C%87%E5%90%91%E5%A0%86%E4%B8%8A%E7%9A%84%E6%95%B0%E6%8D%AE)。
 
 堆上的数据，是运行时候根据数据类型，动态申请的内存 ; 而栈上的数据，是编译时候就明确数据类型的大小。
 
