@@ -34,7 +34,7 @@ B收到了内容为 0x01 的UDP包，响应 0x02 标识自己在线。
 
 将探测在线的包设计的足够小、同时选用UDP作为底层通讯协议，是为了方便端口扫描、打洞、内网穿透，进而实现任意节点之间互联互通和大文件的分发。
 
-协议设计中发送的包等于响应的包尺寸（发送1个字节，响应1个字节），可避免恶意节点伪造网络地址从事UDP反射放大攻击。
+协议设计中发送的包等于响应的包尺寸（发送1个字节，响应1个字节），可避免恶意节点伪造网络地址从事[UDP反射放大攻击](https://wikipedia.org/wiki/Denial-of-service_attack#Reflected_.2F_spoofed_attack)。
 
 A把正在探测中节点的IP地址和端口放入带超时的缓存。
 
@@ -59,11 +59,11 @@ Ed25519的公钥和秘钥可以转换为X25519的公钥和秘钥。
   * [USING ED25519 SIGNING KEYS FOR ENCRYPTION](https://blog.filippo.io/using-ed25519-keys-for-encryption/)
   * [ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/commit/3ea98e4403942b328b1deedf322619622e4503a7)
 
-所以，交换Ed25519公钥之后，就可以通过X25519协议生成秘钥([diffie hellman](https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2-%E8%B5%AB%E7%88%BE%E6%9B%BC%E5%AF%86%E9%91%B0%E4%BA%A4%E6%8F%9B))。
+所以，交换Ed25519公钥之后，就可以通过X25519协议生成秘钥([迪菲-赫尔曼密钥交换](https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2-%E8%B5%AB%E7%88%BE%E6%9B%BC%E5%AF%86%E9%91%B0%E4%BA%A4%E6%8F%9B))。
 
 A收到B的公钥后，会加密请求一次B的根节点哈希, 0x04+加密的空包。（因为公钥不经常改变，所以二次连接可以直接尝试从这一步开始）。
 
-B响应一个加密的根节点哈希，0x05+加密的根节点哈希。
+B响应0x05+加密的根节点哈希。
 
 当收到加密的根节点请求或响应时候连接才算真正建立，会加入心跳打洞的队列中去。
 
