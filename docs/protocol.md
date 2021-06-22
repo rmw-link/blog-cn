@@ -10,6 +10,10 @@
 
 身份秘钥是Ed25519密钥对。
 
+代码实现中(参见[ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/blob/master/src/blake3_512.rs))，我们用效率更高的blake3-512替换标准Ed25519算法中的sha512作为哈希函数。
+
+更快是极客永恒的追求。
+
 首次启动时，客户端会自动生成一个密钥对。
 
 不同设备可以导入同一秘钥，也就是说，你的平板、手机、电脑可以同时在线。
@@ -46,11 +50,7 @@ A收到B的响应后，首先检查缓存，确认B的IP地址和端口是否在
 
 ## 通讯秘钥
 
-代码实现中(参见[ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/blob/master/src/blake3_512.rs))，我们用效率更高的blake3-512替换标准Ed25519算法中的sha512作为哈希函数。
-
-更快是极客永恒的追求。
-
-A收到B的响应，然后A发送 0x03 + A的公钥 给 B。
+A收到B的响应，然后A发送 0x03 + A的公钥 给 B。（可以先尝试从这一步开始连接，连接失败之后再从端口扫描那一步开始）。
 
 B收到后，响应 0x04 + B的公钥。
 
@@ -58,16 +58,22 @@ Ed25519的公钥和秘钥可以转换为X25519的公钥和秘钥。
 
 参见:
 
-* [USING ED25519 SIGNING KEYS FOR ENCRYPTION](https://blog.filippo.io/using-ed25519-keys-for-encryption/)
-* [ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/commit/3ea98e4403942b328b1deedf322619622e4503a7)
+  * [USING ED25519 SIGNING KEYS FOR ENCRYPTION](https://blog.filippo.io/using-ed25519-keys-for-encryption/)
+  * [ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/commit/3ea98e4403942b328b1deedf322619622e4503a7)
 
 所以，交换Ed25519公钥之后，就可以通过X25519协议生成秘钥([diffie hellman](https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2-%E8%B5%AB%E7%88%BE%E6%9B%BC%E5%AF%86%E9%91%B0%E4%BA%A4%E6%8F%9B))。
+
+A收到B的公钥后，会加密请求一次B的根节点哈希, 0x04+加密的空包。（因为公钥不经常改变，所以二次连接可以直接尝试从这一步开始）
+
+B响应一个加密的根节点哈希，0x05+加密的根节点哈希。
+
+当收到加密的根节点请求或响应时候连接才算真正建立，会加入心跳打洞的队列中去。
+
+## 打洞心跳
 
 由于UDP转换协议提供的“洞”不是绝对可靠的，多数NAT设备内部都有一个UDP转换的空闲状态计时器，如果在一段时间内没有UDP数据通信，NAT设备会关掉由“打洞”操作打出来的“洞”，做为应用程序来讲如果想要做到与设备无关，就最好在穿越NAT的以后设定一个穿越的有效期。很遗憾目前没有标准有效期，这个有效期与NAT设备内部的配置有关，最短的只有20秒左右。在这个有效期内，即使没有p2p数据包需要传输，应用程序为了维持该“洞”可以正常工作，也必须向对方发送“打洞”维持包。这个维持包是需要双方应用都发送的，只有一方发送不会维持另一方的会话正常工作。
 
 所有，为了保证打洞有效，双方每19秒都向对方发一次心跳包(有些路由器UDP老化时间只有20秒)，包内容为空包。
-
-
 
 ### 加密解密
 
