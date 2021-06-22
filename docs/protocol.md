@@ -59,7 +59,7 @@ Ed25519的公钥和秘钥可以转换为X25519的公钥和秘钥。
 参见:
 
 * [USING ED25519 SIGNING KEYS FOR ENCRYPTION](https://blog.filippo.io/using-ed25519-keys-for-encryption/)
-* [ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/commit/3ea98e4403942b328b1deedf322619622e4503a7])
+* [ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/commit/3ea98e4403942b328b1deedf322619622e4503a7)
 
 所以，交换Ed25519公钥之后，就可以通过X25519协议生成秘钥。
 
