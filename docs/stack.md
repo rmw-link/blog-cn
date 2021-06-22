@@ -118,9 +118,7 @@ impl<
 
 #### `#![feature(decl_macro)]`
 
-`macro_rules!`
-
-声明的宏没法使用use，否则会出现reimported（当调用一个宏多次之后）
+`macro_rules!` 声明的宏没法使用use，否则会出现reimported（当调用一个宏多次之后）
 
 加入 #![feature(decl_macro)] 之后就可以使用 
 
