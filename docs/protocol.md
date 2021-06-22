@@ -10,7 +10,7 @@
 
 身份秘钥是Ed25519密钥对。
 
-代码实现中(参见[ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/blob/master/src/blake3_512.rs))，我们用效率更高的blake3-512替换标准Ed25519算法中的sha512作为哈希函数。
+我们用效率更高的blake3-512替换标准Ed25519算法中的sha512作为哈希函数，代码实现参见[ed25519-dalek-blake3](https://github.com/rmw-dart/ed25519-dalek-blake3/blob/master/src/blake3_512.rs)，
 
 更快是极客永恒的追求。
 
