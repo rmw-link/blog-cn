@@ -77,7 +77,7 @@ B响应一个加密的根节点哈希，0x05+加密的根节点哈希。
 
 ### 加密解密
 
-基于 [xxh3](https://crates.io/crates/twox-hash) 和 [blake3](https://crates.io/crates/blake3) 我们自定义了一个流加密算法，以方便将对每个UDP包单独加密。
+我们基于 [xxh3](https://crates.io/crates/twox-hash) 和 [blake3](https://crates.io/crates/blake3) 自定义了一个流加密算法，以方便将对每个UDP包单独加密。
 
 加密流程 :
 
