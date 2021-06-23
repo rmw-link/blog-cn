@@ -3,6 +3,7 @@ module.exports = {
     sidebar:[
       '/'
       '/protocol'
+      '/db'
       '/stack'
     ]
     nav: [
