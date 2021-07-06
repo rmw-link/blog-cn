@@ -2,9 +2,10 @@ module.exports = {
   themeConfig:
     sidebar:[
       '/'
-      '/protocol'
-      '/db'
-      '/stack'
+      '/log'
+      # '/protocol'
+      #      '/db'
+     # '/stack'
     ]
     nav: [
       {
