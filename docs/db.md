@@ -1,7 +1,30 @@
 启动流程
 
+
+kad
+  is_empty
+  boot(ip_seed_list)
+  next(bucket_id)
+    到了最后一个就返回none
+  connected(ip,key)
+  heartbeat(ip)
+  expired 每20秒检测一次
+
+当没有节点的时候会一直运行boot
+数据库只保留1024个
+
+kad
+  bucket
+    [8]
+      ip
+      key
+      last_time
+    [candidate]
+
 从数据库每个bucket读取128个节点，同时开始连接，也就是同时发出4096个请求
 每个bucket维持8个连接
+
+从第一个非空且不满8个的桶开始
 
 如果bucket没满，搜索bucket
 
@@ -16,11 +39,17 @@ A 收到这 K 个节点的 ID 之后，（仅仅根据这批 ID 的值）就可�
 然后 A 会继续向刚刚拿到的这批节点发送查询请求（协议类型 FIND_NODE），如此往复（递归），直至 A 建立了足够详细的路由表。
 
 
-kad
-  bucket
-    ip
-    key
-    last_time
+接收到请求之后，也会来填桶，如果桶不满
+每个桶有128个候选，候选不发心跳，只是备用
+
+每有一个超时，就尝试补充一个新的
+
+
+快速重连
+
+请求
+响应没有公钥
+
 
 每19秒ping一次
 超过60秒没ping，就丢弃重连
