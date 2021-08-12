@@ -1,6 +1,5 @@
 启动流程
 
-
 kad
   is_empty
   boot(ip_seed_list)
@@ -9,6 +8,27 @@ kad
   connected(ip,key)
   heartbeat(ip)
   expired 每20秒检测一次
+
+
+启动
+
+  数据库
+    kad
+      距离
+        IP 端口 公钥
+
+    IP-端口 公钥
+    公钥 IP-端口
+
+  快速连接
+    CMD KEY 代表需要重新连接
+    如果 在connecting状态
+      回第一步ping
+    否则
+      发送 KEY 加密的公钥
+
+
+https://docs.rs/async-std/1.9.0/async_std/task/fn.sleep.html
 
 当没有节点的时候会一直运行boot
 数据库只保留1024个
