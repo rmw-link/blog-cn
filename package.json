@@ -6,7 +6,7 @@
   "author": "gcxfd <i@rmw.link>",
   "license": "MIT",
   "devDependencies": {
-    "coffeescript": "^2.5.1"
+    "coffeescript": "^2.6.1"
   },
   "scripts": {
     "dev": "vuepress dev docs",
