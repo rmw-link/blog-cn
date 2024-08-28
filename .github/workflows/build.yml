@@ -1,0 +1,36 @@
+# This is a basic workflow to help you get started with Actions
+
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: setup SSH keys and known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.SSHKEY }}"
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+
+      - name: build
+        run: |
+          git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+          git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+          ./build.sh
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
